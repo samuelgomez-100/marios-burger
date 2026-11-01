@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Panel · Mario's Burger & Lomitos</title>
+  <meta name="theme-color" content="#2a1c12">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧑‍🍳</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..700&family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar" style="background: var(--ink)">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">🧑‍🍳</div>
+        <div>
+          <h1>Panel de pedidos</h1>
+          <p>Mario's Burger &amp; Lomitos</p>
+        </div>
+      </div>
+      <button class="btn btn-sm" type="button" id="sound-btn" aria-pressed="false">🔕 Sonido</button>
+    </div>
+  </header>
+
+  <main class="panel-main">
+    <div class="panel-status">
+      <span class="live" id="live">Conectando…</span>
+      <div class="panel-tools">
+        <a href="/" target="_blank" rel="noopener" class="hint">Abrir página del cliente ↗</a>
+        <button class="btn btn-sm" type="button" id="manual-open">+ Pedido manual</button>
+      </div>
+    </div>
+    <div id="panel-error" class="form-error panel-error" role="alert" hidden></div>
+
+    <div class="panel-views" role="group" aria-label="Sección">
+      <button type="button" data-view="orders" aria-pressed="true">🧾 Pedidos</button>
+      <button type="button" data-view="admin" aria-pressed="false">📋 Menú y stock</button>
+    </div>
+
+    <div id="view-orders">
+    <div class="status-tabs" role="group" aria-label="Filtrar por estado">
+      <button type="button" data-show="nuevo" aria-pressed="true">Nuevos <span class="count" id="count-tab-nuevo">0</span></button>
+      <button type="button" data-show="preparando" aria-pressed="false">Preparando <span class="count" id="count-tab-preparando">0</span></button>
+      <button type="button" data-show="listo" aria-pressed="false">Listos <span class="count" id="count-tab-listo">0</span></button>
+    </div>
+
+    <div class="board" id="board" data-active="nuevo">
+      <section class="column" data-status="nuevo">
+        <h2>🔴 Nuevos <span class="count" id="count-nuevo">0</span></h2>
+        <div class="column-list" id="list-nuevo"><div class="skeleton"></div></div>
+      </section>
+      <section class="column" data-status="preparando">
+        <h2>🟡 Preparando <span class="count" id="count-preparando">0</span></h2>
+        <div class="column-list" id="list-preparando"><div class="skeleton"></div></div>
+      </section>
+      <section class="column" data-status="listo">
+        <h2>🟢 Listos <span class="count" id="count-listo">0</span></h2>
+        <div class="column-list" id="list-listo"><div class="skeleton"></div></div>
+      </section>
+    </div>
+    </div>
+
+    <section id="view-admin" class="admin card" hidden>
+      <div class="admin-head">
+        <h2>Menú y stock</h2>
+        <p class="hint">Los cambios se aplican al instante en la página del cliente, en el asistente y en la validación de pedidos.</p>
+      </div>
+      <div id="admin-menu"><div class="skeleton"></div></div>
+    </section>
+  </main>
+
+  <dialog id="login" class="manual login" aria-labelledby="login-title">
+    <form id="login-form" autocomplete="off">
+      <div class="manual-head">
+        <div>
+          <h2 id="login-title">Entrar al panel</h2>
+          <p class="hint">Ingresá la clave del local.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="login-key">Clave</label>
+        <input id="login-key" type="password" autocomplete="current-password" required>
+      </div>
+      <div id="login-error" class="form-error" role="alert" hidden></div>
+      <div class="manual-actions"><button class="btn" type="submit" id="login-btn">Entrar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="manual" class="manual" aria-labelledby="manual-title">
+    <form id="manual-form" autocomplete="off" novalidate>
+      <div class="manual-head">
+        <div>
+          <h2 id="manual-title">Pedido manual</h2>
+          <p class="hint">Para pedidos que llegan por WhatsApp o teléfono.</p>
+        </div>
+        <button class="icon-btn" type="button" id="manual-close" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="manual-add">
+        <div class="field">
+          <label for="m-product">Producto</label>
+          <select id="m-product"></select>
+        </div>
+        <div class="field" id="m-variant-field" hidden>
+          <label for="m-variant" id="m-variant-label">Opción</label>
+          <select id="m-variant"></select>
+        </div>
+        <div class="field m-qty">
+          <label for="m-qty">Cant.</label>
+          <input id="m-qty" type="number" min="1" max="50" value="1" inputmode="numeric">
+        </div>
+        <div class="field m-notes">
+          <label for="m-notes">Aclaración (opcional)</label>
+          <input id="m-notes" maxlength="80" placeholder="Ej: sin cebolla">
+        </div>
+        <button class="btn btn-ghost btn-sm" type="button" id="m-add">Agregar</button>
+      </div>
+
+      <ul class="lines" id="m-lines"></ul>
+
+      <div class="fields">
+        <div class="manual-row">
+          <div class="field"><label for="m-name">Nombre</label><input id="m-name" maxlength="60"></div>
+          <div class="field"><label for="m-phone">Teléfono</label><input id="m-phone" type="tel" maxlength="30" inputmode="tel"></div>
+        </div>
+        <div class="field">
+          <span class="label">Retiro o envío</span>
+          <div class="segmented">
+            <button type="button" data-m-mode="retiro" aria-pressed="true">🏃 Retiro</button>
+            <button type="button" data-m-mode="envio" aria-pressed="false">🛵 Envío</button>
+          </div>
+        </div>
+        <div class="field" id="m-address-field" hidden><label for="m-address">Dirección</label><input id="m-address" maxlength="120"></div>
+        <div class="field" id="m-details-field" hidden><label for="m-details">Más detalles (opcional)</label><input id="m-details" maxlength="160" placeholder="Entre calles, timbre…"></div>
+        <div class="field"><label for="m-time">Horario</label><input id="m-time" maxlength="40" placeholder="Ej: 21:30 o lo antes posible"></div>
+      </div>
+
+      <div class="manual-total"><span>Total</span><span id="m-total">$ 0</span></div>
+      <div id="m-error" class="form-error" role="alert" hidden></div>
+      <div class="manual-actions">
+        <button class="btn btn-ghost" type="button" id="manual-cancel">Cancelar</button>
+        <button class="btn" type="submit" id="m-submit">Cargar pedido</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="/panel.js" type="module"></script>
+</body>
+</html>

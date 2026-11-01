@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mario's Burger & Lomitos · Pedidos</title>
+  <meta name="theme-color" content="#1d1712">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..700&family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">🍔</div>
+        <div>
+          <h1>Mario's Burger &amp; Lomitos</h1>
+          <p id="local-info">Pedí por acá, sin esperar</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card" aria-label="Pedido">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tab-chat" aria-selected="true" aria-controls="view-chat">💬 Chat</button>
+        <button class="tab" role="tab" id="tab-menu" aria-selected="false" aria-controls="view-menu">📋 Menú</button>
+        <button class="tab" role="tab" id="tab-orders" aria-selected="false" aria-controls="view-orders">📦 Mis pedidos</button>
+      </div>
+
+      <div id="view-chat" role="tabpanel" aria-labelledby="tab-chat" class="chat">
+        <div id="ai-banner" class="ai-banner" hidden></div>
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <form id="composer" class="composer" autocomplete="off">
+          <div class="composer-row">
+            <label for="chat-input" class="sr-only">Mensaje</label>
+            <textarea id="chat-input" rows="1" maxlength="500" placeholder="Escribí tu pedido, ej: 2 lomitos y una coca"></textarea>
+            <button class="btn" id="send-btn" type="submit">Enviar</button>
+          </div>
+          <div class="composer-meta">
+            <button class="btn btn-ghost btn-sm" type="button" id="example-btn">✨ Probar con un ejemplo</button>
+            <span class="hint" id="chat-hint"></span>
+          </div>
+        </form>
+      </div>
+
+      <div id="view-menu" role="tabpanel" aria-labelledby="tab-menu" class="menu" hidden>
+        <div class="menu-grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+      </div>
+
+      <div id="view-orders" role="tabpanel" aria-labelledby="tab-orders" class="my-orders" hidden>
+        <div id="my-orders-list"></div>
+        <form id="lookup-form" class="lookup" autocomplete="off">
+          <h3>¿Pediste desde otro celu?</h3>
+          <p class="hint">Buscalo con el número de pedido y el teléfono que dejaste.</p>
+          <div class="lookup-row">
+            <div class="field">
+              <label for="lookup-id">N.º de pedido</label>
+              <input id="lookup-id" inputmode="numeric" maxlength="6" placeholder="Ej: 104" required>
+            </div>
+            <div class="field">
+              <label for="lookup-phone">Teléfono</label>
+              <input id="lookup-phone" type="tel" inputmode="tel" maxlength="30" placeholder="11 5555-1234" required>
+            </div>
+          </div>
+          <div id="lookup-error" class="form-error" hidden></div>
+          <button class="btn" type="submit" id="lookup-btn">Buscar pedido</button>
+        </form>
+      </div>
+    </section>
+
+    <aside class="card cart-panel" id="cart" aria-label="Tu pedido"></aside>
+  </main>
+
+  <div class="mobile-bar" id="mobile-bar" hidden>
+    <span id="mobile-bar-text"></span>
+    <button class="btn btn-sm" type="button" id="mobile-bar-btn">Ver pedido</button>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

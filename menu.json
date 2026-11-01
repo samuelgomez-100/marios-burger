@@ -1,0 +1,161 @@
+{
+  "local": {
+    "name": "Mario's Burger & Lomitos",
+    "address": "Av. San Martín 1450",
+    "phone": "11 5555-0123",
+    "hours": "Martes a domingo de 19:00 a 00:00. Lunes cerrado.",
+    "deliveryFee": 1500,
+    "deliveryZone": "Hasta 20 cuadras del local",
+    "deliveryTime": "40 a 60 minutos",
+    "pickupTime": "20 a 30 minutos",
+    "payment": "Efectivo o transferencia al retirar o al recibir el pedido"
+  },
+  "categories": [
+    "Hamburguesas",
+    "Lomitos",
+    "Milanesas",
+    "Papas",
+    "Empanadas",
+    "Bebidas",
+    "Postres"
+  ],
+  "products": [
+    {
+      "id": "burger-clasica",
+      "category": "Hamburguesas",
+      "name": "Hamburguesa clásica",
+      "description": "Medallón de carne de 150 g, queso tybo, lechuga, tomate y aderezos. Viene con papas fritas.",
+      "price": 7500,
+      "available": true
+    },
+    {
+      "id": "burger-doble",
+      "category": "Hamburguesas",
+      "name": "Hamburguesa doble cheddar",
+      "description": "Doble medallón, doble cheddar, panceta crocante y cebolla caramelizada. Viene con papas fritas.",
+      "price": 9800,
+      "available": true
+    },
+    {
+      "id": "burger-veggie",
+      "category": "Hamburguesas",
+      "name": "Hamburguesa veggie",
+      "description": "Medallón de lentejas y arroz, queso, lechuga y tomate. Viene con papas fritas.",
+      "price": 7900,
+      "available": false
+    },
+    {
+      "id": "lomito-completo",
+      "category": "Lomitos",
+      "name": "Lomito completo",
+      "description": "Lomo, jamón, queso, huevo frito, lechuga, tomate y mayonesa casera. Viene con papas fritas.",
+      "price": 12500,
+      "available": true
+    },
+    {
+      "id": "lomito-simple",
+      "category": "Lomitos",
+      "name": "Lomito simple",
+      "description": "Lomo, lechuga, tomate y mayonesa casera. Viene con papas fritas.",
+      "price": 10200,
+      "available": true
+    },
+    {
+      "id": "mila-napo",
+      "category": "Milanesas",
+      "name": "Milanesa napolitana al plato",
+      "description": "Milanesa de ternera con salsa de tomate, jamón y muzzarella, con guarnición a elección.",
+      "price": 11800,
+      "available": true,
+      "variants": {
+        "label": "Guarnición",
+        "options": [
+          "fritas",
+          "puré",
+          "ensalada"
+        ]
+      }
+    },
+    {
+      "id": "mila-sandwich",
+      "category": "Milanesas",
+      "name": "Sándwich de milanesa",
+      "description": "Milanesa de ternera, lechuga, tomate y mayonesa en pan francés. No incluye papas.",
+      "price": 8900,
+      "available": true
+    },
+    {
+      "id": "papas-fritas",
+      "category": "Papas",
+      "name": "Papas fritas",
+      "description": "Porción grande para compartir.",
+      "price": 4800,
+      "available": true
+    },
+    {
+      "id": "papas-cheddar",
+      "category": "Papas",
+      "name": "Papas con cheddar y panceta",
+      "description": "Porción grande con salsa cheddar y panceta crocante.",
+      "price": 6500,
+      "available": true
+    },
+    {
+      "id": "empanada",
+      "category": "Empanadas",
+      "name": "Empanada",
+      "description": "Al horno. Precio por unidad.",
+      "price": 1400,
+      "available": true,
+      "variants": {
+        "label": "Sabor",
+        "options": [
+          "carne",
+          "pollo",
+          "jamón y queso",
+          "humita"
+        ]
+      }
+    },
+    {
+      "id": "coca-500",
+      "category": "Bebidas",
+      "name": "Coca-Cola 500 ml",
+      "description": "Botella individual.",
+      "price": 2300,
+      "available": true
+    },
+    {
+      "id": "coca-15",
+      "category": "Bebidas",
+      "name": "Coca-Cola 1,5 L",
+      "description": "Botella para compartir.",
+      "price": 4200,
+      "available": true
+    },
+    {
+      "id": "agua",
+      "category": "Bebidas",
+      "name": "Agua mineral 500 ml",
+      "description": "Sin gas.",
+      "price": 1800,
+      "available": true
+    },
+    {
+      "id": "cerveza",
+      "category": "Bebidas",
+      "name": "Cerveza Quilmes 1 L",
+      "description": "Retornable. Solo mayores de 18.",
+      "price": 4900,
+      "available": true
+    },
+    {
+      "id": "flan",
+      "category": "Postres",
+      "name": "Flan casero",
+      "description": "Con dulce de leche.",
+      "price": 3900,
+      "available": true
+    }
+  ]
+}
